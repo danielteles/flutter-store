@@ -34,7 +34,7 @@ class HomeTab extends StatelessWidget {
             FutureBuilder<QuerySnapshot>(
               future: Firestore.instance
                   .collection("home")
-                  .orderBy("position")
+                  .orderBy("pos")
                   .getDocuments(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
