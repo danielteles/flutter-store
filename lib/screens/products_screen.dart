@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:store/data/product_data.dart';
+import 'package:store/tiles/item_tile.dart';
 
 class ProductsScreen extends StatelessWidget {
   final DocumentSnapshot snapshot;
@@ -22,12 +24,46 @@ class ProductsScreen extends StatelessWidget {
             ],
           ),
         ),
-        body: TabBarView(
-          physics: NeverScrollableScrollPhysics(),
-          children: <Widget>[
-            Container(color: Colors.blue),
-            Container(color: Colors.purple)
-          ],
+        body: FutureBuilder<QuerySnapshot>(
+          future: Firestore.instance
+              .collection("products")
+              .document(snapshot.documentID)
+              .collection("items")
+              .getDocuments(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return Center(child: CircularProgressIndicator());
+            } else {
+              return TabBarView(
+                physics: NeverScrollableScrollPhysics(),
+                children: <Widget>[
+                  GridView.builder(
+                      padding: EdgeInsets.all(4.0),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 4.0,
+                          crossAxisSpacing: 4.0,
+                          childAspectRatio: 0.65),
+                      itemCount: snapshot.data.documents.length,
+                      itemBuilder: (context, index) {
+                        return ItemTile(
+                            "grid",
+                            ProductData.fromDocument(
+                                snapshot.data.documents[index]));
+                      }),
+                  ListView.builder(
+                      padding: EdgeInsets.all(4.0),
+                      itemCount: snapshot.data.documents.length,
+                      itemBuilder: (context, index) {
+                        return ItemTile(
+                            "list",
+                            ProductData.fromDocument(
+                                snapshot.data.documents[index]));
+                      })
+                ],
+              );
+            }
+          },
         ),
       ),
     );
