@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:store/tabs/home_tab.dart';
 import 'package:store/tabs/products_tab.dart';
-import 'package:store/w9dgets/custom_drawer.dart';
+import 'package:store/widgets/custom_drawer.dart';
 
 class HomeScreen extends StatelessWidget {
   final _pageController = PageController();

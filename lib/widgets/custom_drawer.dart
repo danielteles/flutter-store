@@ -45,13 +45,13 @@ class CustomDrawer extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                              "Olá,",
+                              "Hi,",
                               style: TextStyle(
                                   fontSize: 18.0, fontWeight: FontWeight.bold),
                             ),
                             GestureDetector(
                               child: Text(
-                                "Entre ou cadastre-se >",
+                                "Sign-in or Sign-up >",
                                 style: TextStyle(
                                     color: Theme.of(context).primaryColor,
                                     fontSize: 16.0,
@@ -65,11 +65,10 @@ class CustomDrawer extends StatelessWidget {
                 ),
               ),
               Divider(),
-              DrawerTile(Icons.home, "Início", pageController, 0),
-              DrawerTile(Icons.list, "Produtos", pageController, 1),
-              DrawerTile(Icons.location_on, "Lojas", pageController, 2),
-              DrawerTile(
-                  Icons.playlist_add_check, "Meus padidos", pageController, 3),
+              DrawerTile(Icons.home, "Home", pageController, 0),
+              DrawerTile(Icons.list, "Products", pageController, 1),
+              DrawerTile(Icons.location_on, "Stores", pageController, 2),
+              DrawerTile(Icons.playlist_add_check, "Orders", pageController, 3),
             ],
           )
         ],
