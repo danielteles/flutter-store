@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:store/tiles/category_tile.dart';
+import 'package:store/tiles/product_tile.dart';
 
 class ProductsTab extends StatelessWidget {
   @override
@@ -13,7 +13,7 @@ class ProductsTab extends StatelessWidget {
         } else {
           var dividedTiles = ListTile.divideTiles(
                   tiles: snapshot.data.documents.map((doc) {
-                    return CategoryTile(doc);
+                    return ProductTile(doc);
                   }).toList(),
                   color: Colors.grey[500])
               .toList();
