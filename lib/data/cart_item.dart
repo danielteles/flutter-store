@@ -25,7 +25,7 @@ class CartItem {
       "idItem": idItem,
       "amount": amount,
       "version": version,
-      // "product": productData.toResumedMap()
+      "product": productData.toResumedMap()
     };
   }
 }
