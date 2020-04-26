@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:store/screens/signup_screen.dart';
 
-class LoginScreen extends StatelessWidget {
+class SignInScreen extends StatelessWidget {
   final _fomrKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Login"),
+        title: Text("Sign in"),
         centerTitle: true,
         actions: <Widget>[
           FlatButton(
@@ -16,7 +17,10 @@ class LoginScreen extends StatelessWidget {
               style: TextStyle(fontSize: 15.0),
             ),
             textColor: Colors.white,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => SignUpScreen()));
+            },
           )
         ],
       ),
@@ -75,7 +79,7 @@ class LoginScreen extends StatelessWidget {
             SizedBox(
               child: RaisedButton(
                 child: Text(
-                  "Login",
+                  "Sign in",
                   style: TextStyle(fontSize: 18.0),
                 ),
                 textColor: Colors.white,
