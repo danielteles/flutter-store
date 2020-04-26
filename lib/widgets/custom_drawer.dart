@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
+import 'package:store/models/user_model.dart';
 import 'package:store/screens/signin_screen.dart';
 import 'package:store/tiles/drawer_tile.dart';
 
@@ -42,29 +44,41 @@ class CustomDrawer extends StatelessWidget {
                     Positioned(
                         left: 0.0,
                         bottom: 0.0,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              "Hi,",
-                              style: TextStyle(
-                                  fontSize: 18.0, fontWeight: FontWeight.bold),
-                            ),
-                            GestureDetector(
-                              child: Text(
-                                "Sign-in or Sign-up >",
+                        child: ScopedModelDescendant<UserModel>(
+                            builder: (context, child, model) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                "Hi, ${!model.isAuthenticated() ? "" : model.userData["name"]}",
                                 style: TextStyle(
-                                    color: Theme.of(context).primaryColor,
-                                    fontSize: 16.0,
+                                    fontSize: 18.0,
                                     fontWeight: FontWeight.bold),
                               ),
-                              onTap: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => SignInScreen()));
-                              },
-                            )
-                          ],
-                        )),
+                              GestureDetector(
+                                child: Text(
+                                  !model.isAuthenticated()
+                                      ? "Sign-in or Sign-up >"
+                                      : "Logout",
+                                  style: TextStyle(
+                                      color: Theme.of(context).primaryColor,
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                onTap: () {
+                                  if (!model.isAuthenticated()) {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SignInScreen()));
+                                  } else {
+                                    model.signOut();
+                                  }
+                                },
+                              )
+                            ],
+                          );
+                        })),
                   ],
                 ),
               ),
