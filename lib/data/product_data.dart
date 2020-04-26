@@ -17,4 +17,8 @@ class ProductData {
     images = snapshot.data["images"];
     versions = snapshot.data["versions"];
   }
+
+  Map<String, dynamic> toResumedMap() {
+    return {"title": title, "description": description, "price": price};
+  }
 }
